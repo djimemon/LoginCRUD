@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  wrongPassword: boolean = false
   users: User[] = [];
   username: string;
   password: string;
@@ -18,11 +19,21 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.loginService.getLoggedUser())
+      // cambiar a constante
       this.router.navigate(['list'])
   }
 
   checkUser(): void{
-    this.loginService.checkUser(this.username, this.password);
+    if(!this.loginService.checkUser(this.username, this.password))
+      this.launchPasswordModal()
+  }
+
+  closePasswordModal(): void{
+    this.wrongPassword = false
+  }
+
+  launchPasswordModal(): void{
+    this.wrongPassword = true
   }
 
 }

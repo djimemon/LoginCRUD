@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {User} from "../../models/user";
+import {CRUDService} from "../../services/CRUD/crud.service";
 
 @Component({
   selector: 'app-crud-update',
@@ -8,10 +10,11 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class CRUDUpdateComponent implements OnInit {
 
-  constructor() { }
-
+  users: User[];
+  constructor(private crudService: CRUDService) { }
 
   ngOnInit(): void {
+    this.users = this.crudService.downloadUsers();
   }
 
 }
