@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from "../../models/user";
 import { LoginService } from "../../services/login/login.service";
-import { Router, ActivatedRoute } from '@angular/router';
+import {CRUDService} from "../../services/CRUD/crud.service";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
-  constructor(private loginService: LoginService, private router: Router, private route: ActivatedRoute) {}
+  constructor(private loginService: LoginService,private crudService: CRUDService, private router: Router) {}
 
   ngOnInit(): void {
     if (this.loginService.getLoggedUser())
@@ -34,6 +34,10 @@ export class LoginComponent implements OnInit {
 
   launchPasswordModal(): void{
     this.wrongPassword = true
+  }
+
+  reloadUSERS(): void{
+    this.crudService.uploadUsers();
   }
 
 }

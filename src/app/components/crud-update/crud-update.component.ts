@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {User} from "../../models/user";
 import {CRUDService} from "../../services/CRUD/crud.service";
 
@@ -15,6 +14,16 @@ export class CRUDUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.users = this.crudService.downloadUsers();
+  }
+
+  save(user: User): void{
+    this.crudService.saveUser(user)
+    console.log(user.name + " " + user.password)
+  }
+
+  delete(user: User): void{
+    this.crudService.removeUserById(user)
+    window.location.reload()
   }
 
 }
