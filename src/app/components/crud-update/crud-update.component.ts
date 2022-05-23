@@ -21,6 +21,7 @@ export class CRUDUpdateComponent implements OnInit {
     console.log(user.name + " " + user.password)
   }
 
+  //TODO si es el propio usuario no dejar borrar y sacar un modal para confirmar
   delete(user: User): void{
     this.crudService.removeUserById(user)
     window.location.reload()

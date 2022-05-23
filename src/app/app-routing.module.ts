@@ -4,12 +4,13 @@ import {CRUDDisplayComponent} from "./components/crud-display/crud-display.compo
 import {LoginComponent} from "./components/login/login.component";
 import {CRUDUpdateComponent} from "./components/crud-update/crud-update.component";
 import {CRUDCreateComponent} from "./components/crud-create/crud-create.component";
+import {GuardLoginGuard} from "./guards/guard-login.guard";
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
-  {path: 'list', component: CRUDDisplayComponent},
-  {path: 'update', component: CRUDUpdateComponent},
-  {path: 'create', component: CRUDCreateComponent}
+  {path: '',component: LoginComponent},
+  {path: 'list',canActivate: [GuardLoginGuard], component: CRUDDisplayComponent},
+  {path: 'update',canActivate: [GuardLoginGuard], component: CRUDUpdateComponent},
+  {path: 'create', canActivate: [GuardLoginGuard], component: CRUDCreateComponent}
 ]
 
 @NgModule({

@@ -10,6 +10,9 @@ import { CRUDUpdateComponent } from './components/crud-update/crud-update.compon
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import {CRUDService} from './services/CRUD/crud.service'
+import {LoginService} from './services/login/login.service'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,9 +25,10 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
-  providers: [],
+  providers: [CRUDService,
+  LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

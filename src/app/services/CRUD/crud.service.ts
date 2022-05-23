@@ -1,14 +1,25 @@
 import { Injectable } from '@angular/core';
 import {USERS} from "../../datasets/mock-users";
 import {User} from "../../models/user";
+import {Observable} from "rxjs";
+
+// import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore'
 
 @Injectable({
   providedIn: 'root'
 })
 export class CRUDService {
+  // UsersCollection: AngularFirestoreCollection<User>;
+  users: Observable<User[]>;
 
   user: User
-  constructor() { }
+  constructor() {
+    // this.users = this.afs.collection('users').valueChanges();
+  }
+
+  getUsers(){
+    return this.users;
+  }
 
   downloadUsers(): User[]{
     return JSON.parse(localStorage.getItem('USERS') || '[]');
