@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {User} from "../../models/user";
 import {Router} from '@angular/router';
-import {CRUDService} from "../CRUD/crud.service";
+import {CrudService} from "../crud/crud.service";
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +9,16 @@ import {CRUDService} from "../CRUD/crud.service";
 export class LoginService {
 
   loggedUser: User;
+  users: User[];
 
 
-  constructor(private crudService: CRUDService,private router: Router) {}
+  constructor(private crudService: CrudService, private router: Router) {}
 
   checkUser(username: string, password: string): boolean{
-    let users = this.crudService.downloadUsers()
+    this.users = this.crudService.getUsers()
 
-    for (let i = 0; i < users.length; i++) {
-      if (username==users[i].name&&password==users[i].password) {
+    for (let i = 0; i < this.users.length; i++) {
+      if (username===this.users[i].name&&password===this.users[i].password) {
         this.login(username)
         this.router.navigate(['list'])
         return true
@@ -34,10 +35,10 @@ export class LoginService {
 
   logout(): void{
       localStorage.removeItem('loggedUser')
+    console.log(this.getLoggedUser())
   }
 
   getLoggedUser(): string | null{
     return localStorage.getItem('loggedUser')
-
   }
 }

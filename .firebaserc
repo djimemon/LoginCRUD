@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "crud-database-5b7ff": {
+      "hosting": {
+        "LoginCRUD": [
+          "crud-database-5b7ff"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "crud-database-5b7ff"
+  }
+}

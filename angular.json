@@ -98,9 +98,31 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "LoginCRUD:build:production",
+            "firebaseProject": "crud-database-5b7ff",
+            "firebaseHostingSite": "crud-database-5b7ff"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "LoginCRUD"
+  "defaultProject": "LoginCRUD",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

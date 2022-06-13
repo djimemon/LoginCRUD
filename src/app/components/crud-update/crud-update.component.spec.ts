@@ -1,20 +1,28 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CRUDUpdateComponent } from './crud-update.component';
+import { CrudUpdateComponent } from './crud-update.component';
+import {RouterTestingModule} from "@angular/router/testing";
+import {RouterModule} from "@angular/router";
+import {NavBarComponent} from "../nav-bar/nav-bar.component";
 
 describe('CRUDUpdateComponent', () => {
-  let component: CRUDUpdateComponent;
-  let fixture: ComponentFixture<CRUDUpdateComponent>;
+  let component: CrudUpdateComponent;
+  let fixture: ComponentFixture<CrudUpdateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CRUDUpdateComponent ]
+      imports: [
+        RouterTestingModule,
+        RouterModule
+      ],
+      declarations: [ CrudUpdateComponent,
+      NavBarComponent]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CRUDUpdateComponent);
+    fixture = TestBed.createComponent(CrudUpdateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

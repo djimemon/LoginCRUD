@@ -4,30 +4,40 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import {FormsModule} from "@angular/forms";
-import { CRUDDisplayComponent } from './components/crud-display/crud-display.component';
-import { CRUDCreateComponent } from './components/crud-create/crud-create.component';
-import { CRUDUpdateComponent } from './components/crud-update/crud-update.component';
+import { CrudDisplayComponent } from './components/crud-display/crud-display.component';
+import { CrudCreateComponent } from './components/crud-create/crud-create.component';
+import { CrudUpdateComponent } from './components/crud-update/crud-update.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { AppRoutingModule } from './app-routing.module';
+import {RouterModule} from "@angular/router";
+import {RouterTestingModule} from "@angular/router/testing";
 
-import {CRUDService} from './services/CRUD/crud.service'
-import {LoginService} from './services/login/login.service'
+import {CrudService} from './services/crud/crud.service'
+import {LoginService} from './services/login/login.service';
+
+import { environment } from '../environments/environment';
+import {AngularFireModule} from "@angular/fire/compat";
+import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    CRUDDisplayComponent,
-    CRUDCreateComponent,
-    CRUDUpdateComponent,
+    CrudDisplayComponent,
+    CrudCreateComponent,
+    CrudUpdateComponent,
     NavBarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    RouterModule,
+    RouterTestingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
   ],
-  providers: [CRUDService,
+  providers: [CrudService,
   LoginService],
   bootstrap: [AppComponent]
 })

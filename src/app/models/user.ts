@@ -1,7 +1,7 @@
 export interface User
 
 {
-  id: number,
+  id?: String,
   name: string,
   password: string
 }

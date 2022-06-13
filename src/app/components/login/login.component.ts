@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from "../../models/user";
+import {FormControl, Validators} from "@angular/forms";
 import { LoginService } from "../../services/login/login.service";
 import { Router} from '@angular/router';
-import {CRUDService} from "../../services/CRUD/crud.service";
+import {RouterTestingModule} from "@angular/router/testing";
+import {CrudService} from "../../services/crud/crud.service";
 
 @Component({
   selector: 'app-login',
@@ -16,11 +18,10 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
-  constructor(private loginService: LoginService,private crudService: CRUDService, private router: Router) {}
+  constructor(private loginService: LoginService, private crudService: CrudService, private router: Router) {}
 
   ngOnInit(): void {
     if (this.loginService.getLoggedUser())
-      // cambiar a constante
       this.router.navigate(['list'])
   }
 
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
   }
 
   reloadUSERS(): void{
-    this.crudService.uploadUsers();
+    this.crudService.setUsers();
   }
 
 }

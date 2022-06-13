@@ -1,44 +1,30 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {USERS} from "../../datasets/mock-users";
 import {User} from "../../models/user";
-import {Observable} from "rxjs";
+import {FirestorageService} from "../firestorage/firestorage.service";
 
-// import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore'
 
 @Injectable({
   providedIn: 'root'
 })
-export class CRUDService {
-  // UsersCollection: AngularFirestoreCollection<User>;
-  users: Observable<User[]>;
+export class CrudService {
 
-  user: User
-  constructor() {
-    // this.users = this.afs.collection('users').valueChanges();
-  }
 
-  getUsers(){
-    return this.users;
-  }
 
-  downloadUsers(): User[]{
+  constructor(private firestorageService: FirestorageService) {}
+
+
+  getUsers(): User[]{
     return JSON.parse(localStorage.getItem('USERS') || '[]');
 
   }
 
-  uploadUsers(){
+  setUsers(){
     localStorage.setItem('USERS',JSON.stringify(USERS))
   }
 
   updateUsers(users: User[]): void{
     localStorage.setItem('USERS',JSON.stringify(users))
-  }
-
-  saveUser(user: User): void{
-    let users = this.updateUserById(user, this.downloadUsers())
-
-    this.updateUsers(users)
-
   }
 
   updateUserById(user: User, users: User[]): User[]{
@@ -51,16 +37,23 @@ export class CRUDService {
     return users
   }
 
-  removeUserById(user: User){
-    let users = this.downloadUsers()
+  saveUser(user: User): void{
+    let users = this.updateUserById(user, this.getUsers())
 
-    users.splice(user.id)
+    this.updateUsers(users)
+
+  }
+
+  removeUserById(user: User){
+    let users = this.getUsers()
+
+    // users.splice(user.id)
 
     this.updateUsers(users)
   }
 
   createNewUser(user: User):void{
-    let users = this.downloadUsers()
+    let users = this.getUsers()
     users.push(user)
     this.updateUsers(users)
 

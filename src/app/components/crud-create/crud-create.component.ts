@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../models/user";
-import {CRUDService} from "../../services/CRUD/crud.service";
+import {CrudService} from "../../services/crud/crud.service";
+import {FirestorageService} from "../../services/firestorage/firestorage.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -8,21 +9,20 @@ import {Router} from "@angular/router";
   templateUrl: './crud-create.component.html',
   styleUrls: ['./crud-create.component.css']
 })
-export class CRUDCreateComponent implements OnInit {
+export class CrudCreateComponent {
   user: User = {
-    id: 0,
     name: '',
     password: ''
   };
-  constructor(private crudService: CRUDService, private router: Router) { }
+  constructor(private crudService: CrudService,private firestorageService: FirestorageService, private router: Router) { }
 
-  ngOnInit(): void {
-  }
-
-  createUser(user: User):void{ //TODO check for user input
-    user.id = this.crudService.downloadUsers().length
-    this.crudService.createNewUser(user)
-    this.router.navigate(['list'])
+  createUser(user: User){ //TODO check for user input
+    // user.id = this.crudService.getUsers().length.toString()
+    // this.crudService.createNewUser(user)
+    // this.router.navigate(['list'])
+    this.firestorageService.addUser(user)
+    user.name=""
+    user.password=""
   }
 
 }
