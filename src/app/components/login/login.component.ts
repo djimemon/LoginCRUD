@@ -42,4 +42,8 @@ export class LoginComponent implements OnInit {
     this.crudService.setUsers();
   }
 
+  test(){
+    this.loginService.testGoogle()
+  }
+
 }

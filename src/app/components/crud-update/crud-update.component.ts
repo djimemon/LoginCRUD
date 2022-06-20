@@ -11,6 +11,9 @@ import {FirestorageService} from "../../services/firestorage/firestorage.service
 export class CrudUpdateComponent implements OnInit {
 
   users: User[];
+  editState: boolean = false;
+  userToEdit: User;
+
   constructor(private crudService: CrudService, private firestorageService: FirestorageService) { }
 
   ngOnInit(): void {
@@ -19,16 +22,30 @@ export class CrudUpdateComponent implements OnInit {
     })
   }
 
-  save(user: User): void{
-    this.crudService.saveUser(user)
-    console.log(user.name + " " + user.password)
+  editUser(event: Event, user: User){
+    this.editState = true;
+    this.userToEdit = user;
   }
 
-  //TODO si es el propio usuario no dejar borrar y sacar un modal para confirmar
+  updateUser(user: User){
+    this.firestorageService.updateUser(user)
+    this.clearState()
+  }
+
+  clearState(){
+    this.editState=false;
+  }
+
+
   delete(user: User): void{
-    // this.crudService.removeUserById(user)
-    this.firestorageService.deleteUser(user)
-    // window.location.reload()
+
+    if (user.name === localStorage.getItem('loggedUser')){
+      //TODO modal diciendo que no te puedes borrar a ti mismo
+    }else {
+      this.clearState()
+      this.firestorageService.deleteUser(user)
+    }
+
   }
 
 }

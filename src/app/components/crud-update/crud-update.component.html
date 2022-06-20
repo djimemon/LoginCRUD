@@ -5,6 +5,7 @@
 
   <div class="flex flex-col">
     <div class="overflow-x-auto shadow-md sm:rounded-lg">
+
       <div class="inline-block min-w-full align-middle">
         <div class="overflow-hidden ">
 
@@ -24,32 +25,60 @@
                 <span class="sr-only ">Delete</span>
               </th>
               <th scope="col" class="p-4 border">
-                <span class="sr-only ">Edit</span>
+                <svg (click)="clearState()" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                  <path  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" />
+                </svg>
               </th>
             </tr>
             </thead>
 
-<!--            TODO cambiar a formulario-->
             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
             <tr *ngFor="let user of users" class="hover:bg-gray-100 dark:hover:bg-gray-700">
-              <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{user.id}}</td>
+
+              <div *ngIf="editState && userToEdit.id == user.id;then thenBlock else elseBlock"></div>
+
+              <ng-template #thenBlock>
+                  <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{user.id}}</td>
+                  <th>
+                    <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-green-600 focus:outline-none"
+                           placeholder="Enter username" [(ngModel)]="user.name ">
+                  </th>
+                  <th>
+                    <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-green-600 focus:outline-none"
+                           placeholder="Enter password" [(ngModel)]="user.password">
+                  </th>
+                  <th>
+                    <button (click)="delete(user)" class="bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Delete</button>
+                  </th>
+                  <th>
+                    <button (click)="updateUser(user)" class="bg-green-700 hover:bg-green-500 text-white font-bold py-2 px-4 rounded">Save</button>
+                  </th>
+              </ng-template>
+
+              <ng-template #elseBlock>
+                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{user.id}}</td>
+                <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">{{user.name}}</td>
+                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{user.password}}</td>
+
                 <th>
-                  <input [(ngModel)]="user.name" placeholder="User name" class="py-4 px-4 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-black">
+                  <button (click)="delete(user)" class="bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Delete</button>
                 </th>
-              <th>
-                <input [(ngModel)]="user.password" placeholder="User password" class="py-4 px-4 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-black">
-              </th>
-              <th>
-                <button (click)="delete(user)" class="bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Delete</button>
-              </th>
-              <th>
-                <button (click)="save(user)" class="bg-blue-900 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Save</button>
-              </th>
+                <th>
+                  <button (click)="editUser($event, user)" class="bg-blue-900 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Edit</button>
+                </th>
+
+              </ng-template>
+
+
             </tr>
             </tbody>
           </table>
         </div>
       </div>
+
+
     </div>
   </div>
 </div>
+
+

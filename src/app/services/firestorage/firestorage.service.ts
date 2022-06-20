@@ -35,6 +35,11 @@ export class FirestorageService {
     this.usersCollection.add(user);
   }
 
+  updateUser(user: User){
+    this.userDoc = this.db.doc(`users/${user.id}`);
+    this.userDoc.update(user);
+  }
+
   deleteUser(user: User){
     this.userDoc = this.db.doc(`users/${user.id}`);
     this.userDoc.delete();

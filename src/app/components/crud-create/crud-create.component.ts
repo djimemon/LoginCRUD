@@ -9,14 +9,24 @@ import {Router} from "@angular/router";
   templateUrl: './crud-create.component.html',
   styleUrls: ['./crud-create.component.css']
 })
-export class CrudCreateComponent {
+export class CrudCreateComponent implements OnInit{
+  users: User[];
+
   user: User = {
     name: '',
     password: ''
   };
   constructor(private crudService: CrudService,private firestorageService: FirestorageService, private router: Router) { }
 
-  createUser(user: User){ //TODO check for user input
+  ngOnInit(): void {
+    this.firestorageService.getUsers().subscribe(users => {
+      this.users = users;
+    })
+
+
+  }
+
+  createUser(user: User){
     // user.id = this.crudService.getUsers().length.toString()
     // this.crudService.createNewUser(user)
     // this.router.navigate(['list'])
