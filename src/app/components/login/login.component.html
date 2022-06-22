@@ -25,7 +25,7 @@
                       class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       required
                       id="exampleFormControlInput1"
-                      placeholder="Username"
+                      placeholder="Username or email"
                     />
                   </div>
 
@@ -62,7 +62,24 @@
                     </button>
                   </div>
                 </form>
+                <div class="flex flex-row">
+                  <p>Don't have an account?</p>
+                  <button
+                    (click)="checkUser()"
+                    class="inline-block text-white mx-1.5 px-6 py-2.5 font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3"
+                    data-mdb-ripple="true"
+                    data-mdb-ripple-color="light"
+                    style="
+                        background: linear-gradient(
+                          to right,
+                          #6485C1,
+                          darkblue
+                        );">
+                    Sign in
+                  </button>
+                </div>
               </div>
+
             </div>
             <div
               class="lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none"
