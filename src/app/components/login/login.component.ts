@@ -14,7 +14,6 @@ import {CrudService} from "../../services/crud/crud.service";
 export class LoginComponent implements OnInit {
 
   wrongPassword: boolean = false
-  users: User[] = [];
   username: string;
   password: string;
 
@@ -44,6 +43,10 @@ export class LoginComponent implements OnInit {
 
   test(){
     this.loginService.testGoogle()
+  }
+
+  register(){
+    this.router.navigate(['register'])
   }
 
 }

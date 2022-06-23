@@ -8,13 +8,14 @@ import {User} from "../../models/user";
 })
 export class FirestorageService {
 
+
+  tempUsers: User[];
   usersCollection: AngularFirestoreCollection<User>;
   users: Observable<User[]>;
   userDoc: AngularFirestoreDocument<User>
 
   usersRef: AngularFirestoreCollection<User>;
   constructor(private db: AngularFirestore) {
-    // this.users = this.db.collection('users').valueChanges();
 
     this.usersCollection = this.db.collection('users');
 
@@ -32,7 +33,8 @@ export class FirestorageService {
   }
 
   addUser(user: User){
-    this.usersCollection.add(user);
+
+    this.usersCollection.add(user)
   }
 
   updateUser(user: User){

@@ -1,6 +1,6 @@
 <app-nav-bar></app-nav-bar>
 
-<div class="max-w-2xl mx-auto">
+<div class="w-fit mx-auto">
 
   <div class="flex flex-col">
     <div class="overflow-x-auto shadow-md sm:rounded-lg">
@@ -10,13 +10,13 @@
             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
             <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
               <th>
-                <input [(ngModel)]="user.name" placeholder="User name" class="py-4 px-4 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-black">
-              </th>
-              <th>
-                <input [(ngModel)]="user.password" placeholder="User password" class="py-4 px-4 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-black">
-              </th>
-              <th>
-                <button (click)="createUser(user)" class="bg-blue-900 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Create</button>
+                <input [(ngModel)]="user.name" placeholder="User name" class="mx-5 my-3 py-4 px-4 text-sm font-medium text-gray-500 dark:text-black rounded">
+
+                <input [(ngModel)]="user.password" placeholder="User password" class="mx-5 my-3 py-4 px-4 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-black rounded">
+
+                <input [(ngModel)]="user.email" placeholder="User email" class="mx-5 my-3 py-4 px-4 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-black rounded">
+
+                <button (click)="createUser(user)" class=" mx-5 bg-blue-900 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Create</button>
               </th>
             </tr>
             </tbody>
@@ -36,6 +36,9 @@
               <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                 PASSWORD
               </th>
+              <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                EMAIL
+              </th>
             </tr>
             </thead>
 
@@ -44,6 +47,7 @@
               <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{user.id}}</td>
               <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">{{user.name}}</td>
               <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{user.password}}</td>
+              <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{user.email}}</td>
             </tr>
             </tbody>
           </table>

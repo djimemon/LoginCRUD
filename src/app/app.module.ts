@@ -18,6 +18,7 @@ import {LoginService} from './services/login/login.service';
 import { environment } from '../environments/environment';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
     CrudDisplayComponent,
     CrudCreateComponent,
     CrudUpdateComponent,
-    NavBarComponent
+    NavBarComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

@@ -14,7 +14,8 @@ export class CrudCreateComponent implements OnInit{
 
   user: User = {
     name: '',
-    password: ''
+    password: '',
+    email: ''
   };
   constructor(private crudService: CrudService,private firestorageService: FirestorageService, private router: Router) { }
 

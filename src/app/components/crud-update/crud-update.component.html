@@ -1,7 +1,7 @@
 <app-nav-bar></app-nav-bar>
 
 
-<div class="max-w-4xl mx-auto">
+<div class="w-fit mx-auto">
 
   <div class="flex flex-col">
     <div class="overflow-x-auto shadow-md sm:rounded-lg">
@@ -20,6 +20,9 @@
               </th>
               <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider border text-left text-gray-700 uppercase dark:text-gray-400">
                 PASSWORD
+              </th>
+              <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider border text-left text-gray-700 uppercase dark:text-gray-400">
+                EMAIL
               </th>
               <th scope="col" class="p-4 border">
                 <span class="sr-only ">Delete</span>
@@ -59,12 +62,13 @@
                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{user.id}}</td>
                 <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">{{user.name}}</td>
                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{user.password}}</td>
+                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{user.email}}</td>
 
                 <th>
-                  <button (click)="delete(user)" class="bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Delete</button>
+                  <button (click)="delete(user)" class="mx-5 bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Delete</button>
                 </th>
                 <th>
-                  <button (click)="editUser($event, user)" class="bg-blue-900 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Edit</button>
+                  <button (click)="editUser($event, user)" class="mx-5 bg-blue-900 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Edit</button>
                 </th>
 
               </ng-template>

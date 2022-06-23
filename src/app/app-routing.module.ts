@@ -5,12 +5,14 @@ import {LoginComponent} from "./components/login/login.component";
 import {CrudUpdateComponent} from "./components/crud-update/crud-update.component";
 import {CrudCreateComponent} from "./components/crud-create/crud-create.component";
 import {GuardLoginGuard} from "./guards/guard-login.guard";
+import {RegisterComponent} from "./components/register/register.component";
 
 const routes: Routes = [
   {path: '',component: LoginComponent},
   {path: 'list', component: CrudDisplayComponent},
   {path: 'update', component: CrudUpdateComponent},
-  {path: 'create',  component: CrudCreateComponent}
+  {path: 'create',  component: CrudCreateComponent},
+  {path: 'register', component: RegisterComponent}
 ]
 
 @NgModule({

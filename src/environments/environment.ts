@@ -1,4 +1,5 @@
-
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
 export const environment = {
   production: false,
@@ -14,3 +15,8 @@ export const environment = {
   }
 };
 
+// Initialize Firebase
+const app = initializeApp(environment.firebase);
+
+// Initialize Analytics and get a reference to the service
+const analytics = getAnalytics(app);
