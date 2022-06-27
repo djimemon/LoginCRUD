@@ -1,0 +1,163 @@
+<section class="h-full gradient-form bg-gray-200 md:h-screen">
+  <div class="container py-12 px-6 h-full">
+    <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
+      <div class="xl:w-10/12">
+        <div class="block bg-white shadow-lg rounded-lg">
+          <div class="lg:flex lg:flex-wrap g-0">
+            <div class="lg:w-6/12 px-4 md:px-0">
+              <div class="md:p-12 md:mx-6">
+                <div class="text-center">
+                  <img
+                    class="mx-auto w-48"
+                    src="https://upload.wikimedia.org/wikipedia/commons/0/09/NTT-Data-Logo.svg"
+                    alt="logo"
+                  />
+                </div>
+                <form>
+                  <p class="mb-4">Please fill the data of your new account</p>
+
+                  <div class="mb-4">
+                    <input
+                      [(ngModel)]="username"
+                      #name="ngModel"
+                      name="username"
+                      type="text"
+                      [ngClass]="name.errors?.['required'] ? 'bg-red-50 focus:bg-red-50' : 'bg-green-50 focus:bg-green-50'"
+                      class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      required
+                      placeholder="Username"
+                    />
+                  </div>
+
+                  <div class="mb-4">
+                    <input
+                      [(ngModel)]="email"
+                      #mail="ngModel"
+                      name="email"
+                      type="text"
+                      [ngClass]="mail.errors?.['required'] ? 'bg-red-50 focus:bg-red-50' : 'bg-green-50 focus:bg-green-50'"
+                      class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      required
+                      placeholder="Email"
+                    />
+                  </div>
+
+
+                  <div class="mb-4">
+                    <input
+                      [(ngModel)]="password"
+                      #pass="ngModel"
+                      name="password"
+                      type="password"
+                      [ngClass]="pass.errors?.['required'] ? 'bg-red-50 focus:bg-red-50' : 'bg-green-50 focus:bg-green-50'"
+                      class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-green-600 focus:outline-none"
+                      required
+                      placeholder="Password"
+                    />
+                  </div>
+
+                  <div class="mb-4">
+                    <input
+                      [(ngModel)]="confirmPassword"
+                      #conpass="ngModel"
+                      name="confimpassword"
+                      type="password"
+                      [ngClass]="conpass.errors?.['required'] ? 'bg-red-50 focus:bg-red-50' : 'bg-green-50 focus:bg-green-50'"
+                      class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-green-600 focus:outline-none"
+                      required
+                      placeholder="Confirm password"
+                    />
+                  </div>
+
+                  <div class="text-center pt-1 mb-12 pb-1">
+                    <button
+                      (click)="register()"
+                      class="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
+                      type="submit"
+                      data-mdb-ripple="true"
+                      data-mdb-ripple-color="light"
+                      style="
+                        background: linear-gradient(
+                          to right,
+                          #6485C1,
+                          darkblue
+                        );
+                      "
+                    >
+                      Sign in
+                    </button>
+                  </div>
+                </form>
+                <div class="flex flex-row">
+                  <p>Already have an account?</p>
+                  <button
+                    (click)="login()"
+                    class="inline-block text-white mx-1.5 px-6 py-2.5 font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out mb-3"
+                    data-mdb-ripple="true"
+                    data-mdb-ripple-color="light"
+                    style="
+                        background: linear-gradient(
+                          to right,
+                          #6485C1,
+                          darkblue
+                        );">
+                    Log in
+                  </button>
+                </div>
+              </div>
+
+            </div>
+            <div
+              class="lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none"
+              style="
+                background: linear-gradient(to right, #6485C1,darkblue);
+              "
+            >
+              <div class="text-white px-4 py-6 md:p-12 md:mx-6">
+                <h4 class="text-xl font-semibold mb-6">CRUD</h4>
+                <p class="text-sm">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!--<div *ngIf="wrongPassword" class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">-->
+
+<!--  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>-->
+
+<!--  <div class="fixed z-10 inset-0 overflow-y-auto">-->
+<!--    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">-->
+<!--      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>-->
+
+<!--      <div class="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">-->
+<!--        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">-->
+<!--          <div class="sm:flex sm:items-start">-->
+<!--            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">-->
+<!--              <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">-->
+<!--                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />-->
+<!--              </svg>-->
+<!--            </div>-->
+<!--            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">-->
+<!--              <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Wrong password or username</h3>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">-->
+<!--          <button (click)="closePasswordModal()" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">OK</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
