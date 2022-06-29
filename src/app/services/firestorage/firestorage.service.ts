@@ -28,6 +28,12 @@ export class FirestorageService {
     }))
   }
 
+  getUserCount(){
+    this.users.subscribe(users => {
+      return users.length;
+    })
+  }
+
   getUsers(){
     return this.users;
   }

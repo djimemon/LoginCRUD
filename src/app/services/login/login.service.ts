@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {User} from "../../models/user";
 import {Router} from '@angular/router';
 import {CrudService} from "../crud/crud.service";
+import {FirestorageService} from "../firestorage/firestorage.service";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 
@@ -13,11 +14,17 @@ export class LoginService {
   loggedUser: User;
   users: User[];
   provider = new GoogleAuthProvider();
+  user: User = {
+    name:'',
+    email:'',
+  }
 
 
-  constructor(private crudService: CrudService, private router: Router) {}
+
+  constructor(private crudService: CrudService,private firestorageService: FirestorageService, private router: Router) {}
 
   checkUser(username: string, password: string): boolean{
+    console.log(this.firestorageService.getUserCount())
     this.users = this.crudService.getUsers()
 
     for (let i = 0; i < this.users.length; i++) {
@@ -54,6 +61,13 @@ export class LoginService {
         // The signed-in user info.
         const user = result.user;
         console.log(user)
+
+        if (user.displayName != null) {
+          if (user.email != null) {
+            this.registerGoogleUser(user.displayName, user.email)
+          }
+        }
+
         // ...
       }).catch((error) => {
       // Handle Errors here.
@@ -65,5 +79,17 @@ export class LoginService {
       const credential = GoogleAuthProvider.credentialFromError(error);
       // ...
     });
+  }
+
+  loginWithGoogle(){
+
+  }
+
+  registerGoogleUser(name: string , mail: string,){
+    let tempUser: User = {
+      name:name,
+      email:mail,
+    }
+    this.firestorageService.addUser(tempUser)
   }
 }

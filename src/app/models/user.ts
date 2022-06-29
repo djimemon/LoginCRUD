@@ -1,9 +1,8 @@
 export interface User
-
 {
-  id?: String,
-  idn?: String,
+  id?: string,
+  idn?: string,
   name: string,
-  password: string,
+  password?: string,
   email: string
 }
