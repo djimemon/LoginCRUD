@@ -23,8 +23,7 @@ export class LoginService {
 
   constructor(private crudService: CrudService,private firestorageService: FirestorageService, private router: Router) {}
 
-  checkUser(username: string, password: string): boolean{
-    console.log(this.firestorageService.getUserCount())
+  checkUser(username: string, password: string): boolean{ //TODO cambiar a firestorage
     this.users = this.crudService.getUsers()
 
     for (let i = 0; i < this.users.length; i++) {
@@ -57,14 +56,16 @@ export class LoginService {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         // @ts-ignore
         const token = credential.accessToken;
-        console.log(token)
         // The signed-in user info.
         const user = result.user;
-        console.log(user)
+        //TODO BUscar si existe y logear si no registrar
+
+
+
 
         if (user.displayName != null) {
           if (user.email != null) {
-            this.registerGoogleUser(user.displayName, user.email)
+            this.checkGoogleUser(user.displayName,user.email)
           }
         }
 
@@ -81,15 +82,39 @@ export class LoginService {
     });
   }
 
-  loginWithGoogle(){
+  checkGoogleUser(username: string, email: string){
+    let found = false;
+    this.firestorageService.getUsers().subscribe(users => {
+      for (let i = 0; i < users.length; i++) {
+        if (username===users[i].name&&email===users[i].email) {
+          this.login(username)
+          this.router.navigate(['list'])
+          found = true
+        }
+      }
+      if (!found){
+        this.registerGoogleUser(username, email)
+        this.login(username)
+        found = true;
+      }
 
+
+    })
   }
 
   registerGoogleUser(name: string , mail: string,){
     let tempUser: User = {
       name:name,
+      password:'GOOGLE',
       email:mail,
     }
-    this.firestorageService.addUser(tempUser)
+    this.firestorageService.getUsers().subscribe(users => {
+      var tempID = users.length+1; //TODO si borras y creas se pisan los id
+      tempUser.idn=tempID.toString();
+      if (tempUser.name!=""){ //TODO preguntar a andres
+        this.firestorageService.addUser(tempUser)
+      }
+      tempUser.name="";
+    })
   }
 }

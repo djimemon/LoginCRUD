@@ -19,7 +19,9 @@ export class CrudDisplayComponent implements OnInit {
   ngOnInit(): void {
     this.firestorageService.getUsers().subscribe(users => {
       this.users = users;
+
     })
+
   }
 
 }

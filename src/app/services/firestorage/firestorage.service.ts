@@ -17,7 +17,7 @@ export class FirestorageService {
   usersRef: AngularFirestoreCollection<User>;
   constructor(private db: AngularFirestore) {
 
-    this.usersCollection = this.db.collection('users');
+    this.usersCollection = this.db.collection('users', ref => ref.orderBy('idn','asc'));
 
     this.users = this.usersCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
@@ -26,12 +26,6 @@ export class FirestorageService {
         return data;
       });
     }))
-  }
-
-  getUserCount(){
-    this.users.subscribe(users => {
-      return users.length;
-    })
   }
 
   getUsers(){

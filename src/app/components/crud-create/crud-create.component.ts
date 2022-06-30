@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {User} from "../../models/user";
 import {CrudService} from "../../services/crud/crud.service";
 import {FirestorageService} from "../../services/firestorage/firestorage.service";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-crud-create',
@@ -17,7 +16,7 @@ export class CrudCreateComponent implements OnInit{
     password: '',
     email: ''
   };
-  constructor(private crudService: CrudService,private firestorageService: FirestorageService, private router: Router) { }
+  constructor(private crudService: CrudService,private firestorageService: FirestorageService) { }
 
   ngOnInit(): void {
     this.firestorageService.getUsers().subscribe(users => {
@@ -28,12 +27,16 @@ export class CrudCreateComponent implements OnInit{
   }
 
   createUser(user: User){
-    // user.id = this.crudService.getUsers().length.toString()
-    // this.crudService.createNewUser(user)
-    // this.router.navigate(['list'])
-    this.firestorageService.addUser(user)
-    user.name=""
-    user.password=""
+    this.firestorageService.getUsers().subscribe(users => {
+      var tempID = users.length+1; //TODO si borras y creas se pisan los id
+      user.idn=tempID.toString();
+      if (user.name!=""){ //TODO preguntar a andres
+        this.firestorageService.addUser(user)
+      }
+      user.name=""
+      user.password=""
+      user.email="";
+    })
   }
 
 }

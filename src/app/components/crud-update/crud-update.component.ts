@@ -20,6 +20,7 @@ export class CrudUpdateComponent implements OnInit {
     this.firestorageService.getUsers().subscribe(users => {
       this.users = users;
     })
+
   }
 
   editUser(event: Event, user: User){
