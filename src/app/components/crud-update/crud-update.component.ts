@@ -10,6 +10,7 @@ import {FirestorageService} from "../../services/firestorage/firestorage.service
 })
 export class CrudUpdateComponent implements OnInit {
 
+  wrongDeleteUser: boolean = false;
   users: User[];
   editState: boolean = false;
   userToEdit: User;
@@ -41,12 +42,20 @@ export class CrudUpdateComponent implements OnInit {
   delete(user: User): void{
 
     if (user.name === localStorage.getItem('loggedUser')){
-      //TODO modal diciendo que no te puedes borrar a ti mismo
+      this.launchPasswordModal()
     }else {
       this.clearState()
       this.firestorageService.deleteUser(user)
     }
 
+  }
+
+  closePasswordModal(): void{
+    this.wrongDeleteUser = false
+  }
+
+  launchPasswordModal(): void{
+    this.wrongDeleteUser = true
   }
 
 }

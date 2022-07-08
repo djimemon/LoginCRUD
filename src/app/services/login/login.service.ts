@@ -9,7 +9,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class LoginService {  //TODO no dejar registrar lo ya existente
 
   loggedUser: User;
   users: User[];
@@ -23,17 +23,20 @@ export class LoginService {
 
   constructor(private crudService: CrudService,private firestorageService: FirestorageService, private router: Router) {}
 
-  checkUser(username: string, password: string): boolean{ //TODO cambiar a firestorage
-    this.users = this.crudService.getUsers()
+  checkUser(username: string, password: string): boolean{
 
-    for (let i = 0; i < this.users.length; i++) {
-      if (username===this.users[i].name&&password===this.users[i].password) {
-        this.login(username)
-        this.router.navigate(['list'])
-        return true
+    this.firestorageService.getUsers().subscribe(users => {
+      for (let i = 0; i < users.length; i++) {
+        if ((username===users[i].name&&password===users[i].password) || (username===users[i].email&&password===users[i].password)) {
+          this.login(users[i].name)
+          this.router.navigate(['list'])
+          return true
+        }
       }
-    }
-    return false
+      return false;
+    })
+
+    return true; //TODO preguntar andres subscribeq
   }
 
   login(username: string): void{
@@ -48,7 +51,7 @@ export class LoginService {
     return localStorage.getItem('loggedUser')
   }
 
-  testGoogle(){
+  loginGoogle(){
     const auth = getAuth();
     signInWithPopup(auth, this.provider)
       .then((result) => {
@@ -58,10 +61,6 @@ export class LoginService {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        //TODO BUscar si existe y logear si no registrar
-
-
-
 
         if (user.displayName != null) {
           if (user.email != null) {
@@ -108,7 +107,7 @@ export class LoginService {
       password:'GOOGLE',
       email:mail,
     }
-    this.firestorageService.getUsers().subscribe(users => {
+    this.firestorageService.getUsers().subscribe(users => { //TODO bucle hasta que encuentre un hueco?
       var tempID = users.length+1; //TODO si borras y creas se pisan los id
       tempUser.idn=tempID.toString();
       if (tempUser.name!=""){ //TODO preguntar a andres

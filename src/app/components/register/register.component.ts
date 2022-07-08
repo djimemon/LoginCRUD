@@ -12,6 +12,7 @@ import {User} from "../../models/user";
 })
 export class RegisterComponent implements OnInit {
 
+  userExist: boolean = false;
   username: string;
   password: string;
   confirmPassword: string;
@@ -34,8 +35,8 @@ export class RegisterComponent implements OnInit {
     if (this.password === this.confirmPassword){
       this.firestorageService.getUsers().subscribe(users => {
         for (let i = 0; i < users.length; i++) {
-          if (this.username===users[i].name&&this.password===users[i].password&&this.email===users[i].email) {
-            //TODO modal usuario ya existe
+          if (this.username===users[i].name&&this.email===users[i].email) {
+            this.launchPasswordModal()
             found = true
           }
         }
@@ -58,5 +59,13 @@ export class RegisterComponent implements OnInit {
 
   login(){
     this.router.navigate([''])
+  }
+
+  closePasswordModal(): void{
+    this.userExist = false
+  }
+
+  launchPasswordModal(): void{
+    this.userExist = true
   }
 }

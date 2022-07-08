@@ -13,7 +13,8 @@ import {CrudService} from "../../services/crud/crud.service";
 })
 export class LoginComponent implements OnInit {
 
-  wrongPassword: boolean = false
+  wrongPassword: boolean = false;
+  user: User;
   username: string;
   password: string;
 
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
   }
 
   googleLogin(){
-    this.loginService.testGoogle()
+    this.loginService.loginGoogle()
   }
 
   register(){
